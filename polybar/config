@@ -1,0 +1,136 @@
+##############
+#Polybar V1.0#
+##############
+
+#Colors, Duh
+[colors]
+foreground = #ffffff
+background = #000000
+
+#Main Monitor Bottom
+[bar/WorkspaceMain]
+
+monitor = DVI-I-1
+
+bottom = true
+fixed-center = true
+module-margin = 2 
+padding = 2
+width = 100%
+height = 26
+line-size = 2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+#fonts
+font-0 = Source Code Pro:size=10;2
+font-1 = Material Icons:size=10;2
+font-2 = DSEG7 Modern:size=10;2
+font-3 = DSEG7 Modern:size=8;3
+modules-left = startmenu
+modules-center = workspaces 
+modules-right = volume clock
+
+
+#Left Monitor Bottom
+[bar/WorkspaceSide]
+inherit = bar/WorkspaceMain
+monitor = DVI-D-0
+
+
+[bar/TV]
+
+monitor = HDMI-0
+
+bottom = true
+fixed-center = true
+module-margin = 2 
+padding = 2
+width = 100%
+height = 26
+line-size = 2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+#fonts
+font-0 = Source Code Pro:size=10;2
+font-1 = Material Icons:size=10;2
+font-2 = DSEG7 Modern:size=10;2
+font-3 = DSEG7 Modern:size=8;3
+modules-center = workspaces 
+modules-right = volume clock
+
+
+
+[module/workspaces]
+type = internal/i3
+
+pin-workspaces = true
+enable-click = true
+enable-scroll = true
+index-sort = true
+
+# Appearance
+format = <label-mode><label-state><label-mode>
+
+label-focused = %name%
+label-focused-overline = ${colors.foreground}
+label-focused-underline = ${colors.foreground}
+label-focused-padding = 1
+
+label-visible = %name%
+label-visible-underline = ${colors.background}
+label-visible-padding = 1
+
+label-urgent = %name%
+label-urgent-overline = #FF8300
+label-urgent-padding = 1
+
+label-unfocused = %name%
+label-unfocused-padding = 1
+
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-margin = 1
+
+
+
+[module/volume]
+type = internal/pulseaudio
+
+#Settings
+use-ui-max = true
+
+#Appearance
+
+format-volume = %{A3:~/.scripts/polybar/volcon.sh:}Volume: <label-volume>%{A}
+label-volume = %percentage%%
+
+format-muted = Volume: Muted
+
+
+#Startmenu 
+[module/startmenu]
+
+type = custom/script
+
+interval = 600
+exec = echo  
+
+click-left = rofi -show drun
+
+#Clock
+[module/clock]
+
+type = internal/date
+
+interval = 0.5
+
+date = %A the %d of %b, %Y
+
+time = %{T3}%H:%M:%{T3}%{T4}%S
+
+label = %date% | %time%
+

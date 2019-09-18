@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+#
+# alert_workspaces.py
+#
+# Print a space-separated list of urgent workspaces
+#
+
+import i3ipc
+import sys
+
+i3 = i3ipc.Connection()
+
+workspaces = i3.get_workspaces()
+
+for workspace in workspaces:
+    if workspace.get('urgent', False):
+        sys.stdout.write(' %s'%workspace.get('name','?'))
+
+sys.stdout.write('\n')

@@ -1,0 +1,11 @@
+[Unit]
+Description=SSH Key Agent, Ask Stephen
+
+[Service]
+Type=oneshot
+ExecStart=%h/.scripts/ssh/start-agent.sh
+ExecStop=%h/.scripts/ssh/stop-agent.sh
+RemainAfterExit=true
+
+[Install]
+WantedBy=default.target
